@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 const MUX_HLS_URL =
-  "https://stream.mux.com/kimF2ha9zLrX64H00UgLGPflCzNtl1T0215MlAmeOztv8.m3u8";
+"/media/videos/video.mp4";
 
 function supportsNativeHls(): boolean {
   if (typeof document === "undefined") return false;
