@@ -1,26 +1,315 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   FlowForge design tokens — single source of truth: context/ui-tokens.md
+   Never hardcode visual values in components; add tokens here first.
+   ============================================================ */
+
+@theme {
+  /* 1. Background */
+  --color-bg-primary: #030303;
+  --color-bg-secondary: #090909;
+  --color-bg-elevated: #111111;
+
+  /* 1. Surface */
+  --color-surface-primary: #0f0f0f;
+  --color-surface-secondary: #151515;
+  --color-surface-inverse: #ffffff;
+
+  /* 1. Typography */
+  --color-text-primary: #f5f5f5;
+  --color-text-secondary: #cfcfcf;
+  --color-text-muted: #8c8c8c;
+  --color-text-inverse: #050505;
+
+  /* 1. Borders (hairline) */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-default: rgba(255, 255, 255, 0.12);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
+
+  /* 1. Accent — interaction only, < 15% of viewport */
+  --color-accent: #73ffb9;
+  --color-accent-hover: #5ef0a8;
+  --color-accent-soft: rgba(115, 255, 185, 0.12);
+
+  /* 14. Glass — navigation / small overlays only.
+     Dark-but-translucent scrim: once scrolled, the navbar sits on a blurred,
+     slightly transparent black so its text stays readable over any content.
+     The hero tape shares the same quiet surface. */
+  --color-glass-bg: rgba(3, 3, 3, 0.75);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --blur-glass: 16px;
+
+  /* 6. Radius — overrides Tailwind defaults intentionally:
+        cards → rounded-lg (16), inputs → rounded-md (12),
+        buttons → rounded-pill, images → rounded-xl (24) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* 12. Opacity tokens — use opacity for secondary info, not color changes */
+  --opacity-high: 0.88;
+  --opacity-medium: 0.72;
+  --opacity-low: 0.52;
+  --opacity-disabled: 0.32;
+
+  /* 13. Shadows — almost invisible */
+  --shadow-sm: 0 4px 18px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 12px 36px rgba(0, 0, 0, 0.22);
+
+  /* 10. Easing — use for nearly all transitions */
+  --ease-facet: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* 3. Type scale (weights applied per-component: 400 body / 500 headings / 600 CTA only) */
+  --text-display-xl: 6.5rem; /* 104px */
+  --text-display-xl--line-height: 0.95;
+  --text-display-xl--letter-spacing: -0.04em;
+  --text-display-lg: 5.5rem; /* 88px */
+  --text-display-lg--line-height: 1;
+  --text-display-lg--letter-spacing: -0.04em;
+  --text-display-md: 4.5rem; /* 72px */
+  --text-display-md--line-height: 1;
+  --text-display-md--letter-spacing: -0.04em;
+  --text-h1: 3.5rem; /* 56px */
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.03em;
+  --text-h2: 3rem; /* 48px */
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.03em;
+  --text-h3: 2.25rem; /* 36px */
+  --text-h3--line-height: 1.15;
+  --text-h3--letter-spacing: -0.02em;
+  --text-h4: 1.75rem; /* 28px */
+  --text-h4--line-height: 1.2;
+  --text-h4--letter-spacing: -0.02em;
+  --text-h5: 1.375rem; /* 22px */
+  --text-h5--line-height: 1.3;
+  --text-body-lg: 1.125rem; /* 18px */
+  --text-body-lg--line-height: 1.65;
+  --text-body: 1rem; /* 16px */
+  --text-body--line-height: 1.6;
+  --text-small: 0.9375rem; /* 15px */
+  --text-small--line-height: 1.55;
+  --text-caption: 0.8125rem; /* 13px */
+  --text-caption--line-height: 1.4;
+  --text-caption--letter-spacing: 0.08em; /* labels are uppercase + tracked */
+
+  /* 5. Section spacing + layout gutter */
+  --section-sm: 5rem; /* 80px */
+  --section-md: 6.5rem; /* 104px */
+  --section-lg: 8rem; /* 128px */
+  --gutter: 1.5rem; /* 24px grid gutter */
+
+  /* 17. Hero services tape — thin autonomous marquee at hero bottom */
+  --tape-height: 1.75rem; /* 28px — stays under the 30px ceiling */
+  --tape-duration: 24s; /* a -50% lap over the 4× title track — 2 sets' width */
 }
 
+/* Fonts: Inter is loaded via next/font and exposed as --font-inter.
+   PP Neue Montreal is the approved display face; until licensed font files
+   are provided (public/fonts/), the stack falls back to Inter. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-display: "PP Neue Montreal", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* 8. Container widths (content max-widths with grid gutter) */
+@utility container-sm {
+  max-width: 768px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility container-md {
+  max-width: 960px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility container-lg {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility container-xl {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* 5. Section spacing utilities */
+@utility section-sm {
+  padding-block: var(--section-sm);
+}
+@utility section-md {
+  padding-block: var(--section-md);
+}
+@utility section-lg {
+  padding-block: var(--section-lg);
+}
+
+/* 8. Body copy measure — long paragraphs never exceed ~70 characters */
+@utility measure-body {
+  max-width: 42.5rem; /* 680px */
+}
+
+/* Hero copy measure */
+@utility measure-hero {
+  max-width: 47.5rem; /* 760px */
+}
+
+/* Carousel track — hide scrollbars; movement is conveyed by snap + controls */
+@utility scrollbar-hide {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--color-bg-primary);
+    color: var(--color-text-secondary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-text-inverse);
+  }
+
+  /* 23. Focus states — never removed, always visible */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Skip link — first focusable element on every page */
+@utility skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-text-inverse);
+  font-size: var(--text-small);
+  transform: translateY(-200%);
+  transition: transform 180ms var(--ease-facet);
+
+  &:focus {
+    transform: translateY(0);
+  }
+}
+
+/* Entrance motion — restrained, hierarchy-serving only (Level 3 motion).
+   Fade + 12px rise on the hero ease; staggered per element. */
+@keyframes facet-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rise {
+  animation: facet-rise 800ms var(--ease-facet) both;
+}
+
+@utility animate-rise-1 {
+  animation: facet-rise 800ms var(--ease-facet) 120ms both;
+}
+
+@utility animate-rise-2 {
+  animation: facet-rise 800ms var(--ease-facet) 240ms both;
+}
+
+@utility animate-rise-3 {
+  animation: facet-rise 800ms var(--ease-facet) 360ms both;
+}
+
+/* Simple fade — the only entrance for overlays (mobile menu), so the
+   navigation never hard-pops. Deliberately no transform: avoids blurring
+   or layout jank over fixed content. */
+@keyframes facet-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@utility animate-fade-in {
+  animation: facet-fade 240ms var(--ease-facet) both;
+}
+
+/* Continuous marquee — hero services tape (client decision 2026-09-14).
+   Constant linear velocity gives an even glide; the -50% translate over a
+   duplicated title track makes the loop seam invisible. Decorative, so it
+   never pauses. Reduced motion: the global kill switch freezes the track. */
+@keyframes facet-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility marquee-track {
+  width: max-content;
+  will-change: transform;
+  animation: facet-marquee var(--tape-duration) linear infinite;
+}
+
+/* Tape window — clips overflow like marquee-window but never pauses;
+   the tape is decorative and runs perpetually. */
+@utility tape-window {
+  overflow: hidden;
+}
+
+/* Tape ends — subtle 45° bevels at both outer corners, evoking a
+   scissor-cut strip of tape without adding colour or gradients. */
+@utility tape-ends {
+  clip-path: polygon(
+    8px 0,
+    100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%,
+    0 8px
+  );
+}
+
+/* 30. Reduced motion — the site must remain fully usable without motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* The tape is decorative; freeze it at its start position (the global
+     kill switch would end it at translateX(-50%)). Band stays full because
+     the title set repeats seamlessly. */
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
 }
