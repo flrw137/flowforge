@@ -90,7 +90,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
       {/* Next step — the conversion path, quiet by design */}
       <section className="container-xl pb-24">
-        <div className="flex flex-wrap items-center justify-between gap-8 rounded-lg border border-border-subtle bg-surface-primary p-10">
+        <div className="flex flex-wrap items-center justify-between gap-8 rounded-lg border border-glass-border bg-glass-card p-10 backdrop-blur-glass">
           <p className="font-body text-body-lg text-text-primary">
             Working on something similar?
           </p>

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 const CUBE_SRC_DESKTOP = "https://res.cloudinary.com/a50bglxq/video/upload/v1790577181/finalfckingvideo.mp4";
-const CUBE_SRC_MOBILE = "/media/videos/cube.mp4";
+const CUBE_SRC_MOBILE = "/media/videos/wvideo.mp4";
 const MOBILE_QUERY = "(max-width: 767px)"; // matches the md: breakpoint
 
 /**

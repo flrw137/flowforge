@@ -12,7 +12,7 @@ export function CaseStudyCard({ study }: { study: CaseStudy }) {
   return (
     <Link
       href={`/case-studies/${study.slug}`}
-      className="group block rounded-lg border border-border-subtle bg-surface-primary transition-colors duration-[280ms] ease-facet hover:border-border-default"
+      className="group block rounded-lg border border-glass-border bg-glass-card backdrop-blur-glass transition-colors duration-[280ms] ease-facet hover:border-border-default"
     >
       {/* Visual — large, controlled ratio (16/9) */}
       <div className="aspect-video overflow-hidden rounded-t-lg bg-bg-secondary">

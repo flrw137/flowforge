@@ -37,7 +37,16 @@
      slightly transparent black so its text stays readable over any content.
      The hero tape shares the same quiet surface. */
   --color-glass-bg: rgba(3, 3, 3, 0.75);
+  /* Card surface over the /work background video — same material as the
+     navbar scrim but a step lighter, so the video reads through the cards
+     while AA text contrast holds on top of the blurred footage. */
+  --color-glass-card: rgba(3, 3, 3, 0.6);
   --color-glass-border: rgba(255, 255, 255, 0.08);
+  /* Mobile menu — same material as the navbar scrim, but a full-screen
+     surface needs a denser fill: at 0.75 the page behind competes with
+     13px labels and the menu stops reading as navigation. 0.94 keeps the
+     material read while holding AA contrast for label text. */
+  --color-glass-menu: rgba(3, 3, 3, 0.94);
   --blur-glass: 16px;
 
   /* 6. Radius — overrides Tailwind defaults intentionally:
@@ -105,14 +114,23 @@
   /* 17. Hero services tape — thin autonomous marquee at hero bottom */
   --tape-height: 1.75rem; /* 28px — stays under the 30px ceiling */
   --tape-duration: 24s; /* a -50% lap over the 4× title track — 2 sets' width */
+
+  /* Services carousel — one full lap over two identical slide sets. Slow
+     enough to read a slide as it passes; the drift itself is constant, so the
+     duration only sets overall speed, not pacing. */
+  --carousel-duration: 70s;
 }
 
 /* Fonts: Inter is loaded via next/font and exposed as --font-inter.
    PP Neue Montreal is the approved display face; until licensed font files
-   are provided (public/fonts/), the stack falls back to Inter. */
+   are provided (public/fonts/), the stack falls back to Inter.
+   Orbitron is loaded the same way and reserved for the wordmark
+   (--font-brand / font-brand): the agency name is the only text set in it. */
 @theme inline {
   --font-sans: var(--font-inter);
   --font-display: "PP Neue Montreal", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-brand: var(--font-orbitron), "PP Neue Montreal", var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
 }
 
 /* 8. Container widths (content max-widths with grid gutter) */
@@ -240,6 +258,28 @@
   animation: facet-rise 800ms var(--ease-facet) 360ms both;
 }
 
+/* Continuous carousel drift — services slides.
+   Constant linear velocity, like the hero tape but on real panels: the track
+   is exactly two identical slide sets, so the -50% lap lands on the copy and
+   the seam is invisible. A stepped interval (advance one slide every few
+   seconds) reads as a presentation being clicked through; constant motion is
+   what makes it read as a carousel. Pauses on hover via animation-play-state
+   — no JS, no re-render, no timer. */
+@keyframes facet-carousel-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility carousel-track {
+  width: max-content;
+  will-change: transform;
+  animation: facet-carousel-drift var(--carousel-duration) linear infinite;
+}
+
 /* Simple fade — the only entrance for overlays (mobile menu), so the
    navigation never hard-pops. Deliberately no transform: avoids blurring
    or layout jank over fixed content. */
@@ -294,6 +334,20 @@
   );
 }
 
+/* Shiny text animation for "digital systems" */
+@keyframes shiny {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@utility animate-shiny {
+  animation: shiny 6s linear infinite;
+}
+
 /* 30. Reduced motion — the site must remain fully usable without motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -306,9 +360,19 @@
   }
 
   /* The tape is decorative; freeze it at its start position (the global
-     kill switch would end it at translateX(-50%)). Band stays full because
-     the title set repeats seamlessly. */
+      kill switch would end it at translateX(-50%)). Band stays full because
+      the title set repeats seamlessly. */
   .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Same for the services carousel: freeze the track at its start rather than
+     letting the global kill switch leave it parked at translateX(-50%), which
+     would show the second copy of the set and read as a different slide. The
+     window stays scrollable, so keyboard and touch users can still move
+     through every service without any motion. */
+  .carousel-track {
     animation: none !important;
     transform: none !important;
   }

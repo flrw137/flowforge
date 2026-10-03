@@ -13,6 +13,20 @@ import { HeroServicesTape } from "@/components/sections/hero-services-tape";
 export function Hero() {
   return (
     <section className="relative flex min-h-[720px] items-end overflow-hidden md:min-h-[820px] xl:min-h-[920px]">
+      {/* SVG noise filter for shiny text */}
+      <svg className="absolute h-0 w-0" aria-hidden="true">
+        <defs>
+          <filter id="c3-noise">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.015"
+              numOctaves="1"
+              seed="2"
+            />
+            <feDisplacementMap in="SourceGraphic" scale="0" />
+          </filter>
+        </defs>
+      </svg>
       {/* Signature visual — full-bleed background (Section media, z-10) */}
       <div className="absolute inset-0 z-10">
         <GlassCube className="h-full w-full" />
@@ -22,10 +36,43 @@ export function Hero() {
       <div className="relative z-20 container-xl w-full pb-16 md:pb-20 xl:pb-24">
         <div className="measure-hero">
           <p className="animate-rise font-body text-caption font-medium uppercase tracking-caption text-text-secondary">
-            AI, automation &amp; digital systems
+            AI, automation &amp;{' '}
+            <span
+              className="md:hidden animate-shiny"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right, #091020 0%, #0B2551 12.5%, #A4F4FD 32.5%, #00d2ff 50%, #0B2551 67.5%, #091020 87.5%, #091020 100%)',
+                backgroundSize: '200% auto',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+                WebkitTextFillColor: 'transparent',
+                filter: 'url(#c3-noise)',
+              }}
+            >
+              digital systems
+            </span>
+            <span className="hidden md:inline">digital systems</span>
           </p>
-          <h1 className="animate-rise-1 mt-5 max-w-[980px] font-display text-[clamp(2rem,6.5vw,15rem)] leading-[0.86] tracking-[-0.08em] text-text-primary md:text-[clamp(3.125rem,7.5vw,15rem)] md:leading-[0.78]">
-            We build digital systems that hold up under scrutiny.
+          <h1 className="animate-rise-1 mt-5 max-w-[980px] font-display text-4xl font-semibold leading-[0.86] tracking-[-0.08em] text-text-primary md:text-[clamp(3.125rem,7.5vw,15rem)] md:font-normal md:leading-[0.78]">
+            We build{' '}
+            <span
+              className="md:hidden animate-shiny"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to right, #091020 0%, #0B2551 12.5%, #A4F4FD 32.5%, #00d2ff 50%, #0B2551 67.5%, #091020 87.5%, #091020 100%)',
+                backgroundSize: '200% auto',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+                WebkitTextFillColor: 'transparent',
+                filter: 'url(#c3-noise)',
+              }}
+            >
+              digital systems
+            </span>
+            <span className="hidden md:inline">digital systems</span> that hold
+            up under scrutiny.
           </h1>
           <p className="animate-rise-2 mt-7 max-w-[760px] font-body text-[clamp(1.1rem,1.65vw,2rem)] leading-[1.45] text-text-secondary">
             FlowForge is a technology and design studio. We design and build AI

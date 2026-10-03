@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/section-heading";
+import { LiquidGlassWaves } from "@/components/sections/liquid-glass-waves";
 
 type CtaPanelProps = {
   heading?: string;
@@ -8,9 +9,11 @@ type CtaPanelProps = {
 };
 
 /**
- * Quiet closing CTA for the secondary pages. The Liquid Glass Waves belong
- * exclusively to the Home FinalCta; every other page ends on this flat,
- * hairline-bordered panel.
+ * Closing CTA for the secondary pages. Full-bleed ambient video background —
+ * the same Liquid Glass Waves asset used by the Home FinalCta — so every page
+ * ends on the same visual note. The video layer sits behind the content
+ * (z-10 vs z-20) and never intercepts pointer events, so the CTA stays
+ * clickable. If playback fails, the flat token surface carries the section.
  */
 export function CtaPanel({
   heading = "Have a project in mind?",
@@ -19,8 +22,9 @@ export function CtaPanel({
   ctaLabel = "Start the conversation",
 }: CtaPanelProps) {
   return (
-    <section className="container-xl section-md">
-      <div className="rounded-lg border border-border-subtle bg-surface-primary px-6 py-16 text-center md:px-16">
+    <section className="relative section-lg overflow-hidden border-t border-border-subtle bg-bg-secondary">
+      <LiquidGlassWaves className="pointer-events-none absolute inset-0 z-10" />
+      <div className="relative z-20 container-xl text-center">
         <Label>Next step</Label>
         <h2 className="mx-auto mt-6 max-w-3xl font-display text-h2 font-medium text-text-primary">
           {heading}

@@ -4,14 +4,15 @@ import type { WorkProject } from "@/lib/work";
 
 /**
  * WorkCard — editorial project card for the /work index (filtered list).
- * Mirrors CaseStudyCard: the image leads, metadata stays quiet, and the
- * project is the visual focus.
+ * The image leads, metadata stays quiet, and the project is the visual focus.
+ * Surface uses the shared glass material (same tokens as the navbar scrim)
+ * because the card sits on the page's background video.
  */
 export function WorkCard({ project }: { project: WorkProject }) {
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="group block rounded-lg border border-border-subtle bg-surface-primary transition-colors duration-[280ms] ease-facet hover:border-border-default"
+      className="group block rounded-lg border border-glass-border bg-glass-card backdrop-blur-glass transition-colors duration-[280ms] ease-facet hover:border-border-default"
     >
       <div className="aspect-video overflow-hidden rounded-t-lg bg-bg-secondary">
         <Image

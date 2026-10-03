@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Wordmark } from "@/components/ui/wordmark";
 
 const FOOTER_LINKS = [
   { href: "/", label: "Home" },
@@ -18,8 +19,8 @@ export function Footer() {
     <footer className="border-t border-border-subtle bg-bg-primary">
       <div className="container-xl flex flex-col gap-12 py-16 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="font-display text-h5 font-medium text-text-primary">
-            FlowForge
+            <p className="text-text-primary">
+            <Wordmark logoClassName="h-13.5 w-auto" />
           </p>
           <p className="mt-2 font-body text-small text-text-muted">
             A technology and design studio.

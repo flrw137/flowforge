@@ -11,7 +11,7 @@ export function ArticleCard({ article }: { article: Insight }) {
   return (
     <Link
       href={`/insights/${article.slug}`}
-      className="group block rounded-lg border border-border-subtle bg-surface-primary transition-colors duration-[280ms] ease-facet hover:border-border-default"
+      className="group block rounded-lg border border-glass-border bg-glass-card backdrop-blur-glass transition-colors duration-[280ms] ease-facet hover:border-border-default"
     >
       <div className="aspect-video overflow-hidden rounded-t-lg bg-bg-secondary">
         <Image

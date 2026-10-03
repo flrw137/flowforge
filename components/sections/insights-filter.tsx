@@ -24,7 +24,7 @@ export function InsightsFilter({ articles }: InsightsFilterProps) {
       <div
         role="group"
         aria-label="Filter notes by topic"
-        className="flex flex-wrap gap-2"
+        className="flex flex-wrap justify-center gap-2"
       >
         {categories.map((category) => (
           <button

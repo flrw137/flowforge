@@ -1,48 +1,31 @@
-"use client";
-
-import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { getAllServices } from "@/lib/services";
 
-const reduceMotion = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 /**
  * ServicesCarousel — the one required interactive treatment on /services.
- * One service fully visible, a peek of the next, horizontal drag/swipe,
- * previous/next controls, a visible index, and snap that respects
- * prefers-reduced-motion. Editorial slides, not SaaS cards.
+ *
+ * Continuous drift: the track slides at a constant velocity in pure CSS and
+ * loops forever, pausing on hover. A stepped interval — advance one slide
+ * every few seconds — reads as a presentation being clicked through by an
+ * invisible hand; constant motion is what makes it read as a carousel.
+ * Nothing is click-to-advance, so there are no previous/next controls and no
+ * index readout.
+ *
+ * Seamless loop: the slide set is rendered twice and one full lap is a
+ * translateX(-50%) — exactly one set's width, since both halves are
+ * identical. The track therefore never "wraps" and never jumps. Duplicating
+ * also means the window is always full at any viewport width, including the
+ * narrow case where one set is narrower than the window.
+ *
+ * Duplicates are `aria-hidden` and their links are removed from the tab order,
+ * so assistive tech and keyboard users meet each service exactly once.
+ *
+ * The window is a scroll container, so touch, trackpad, and keyboard
+ * navigation keep working over the animation; `overflow-x-auto` is the
+ * fallback path entirely once prefers-reduced-motion freezes the drift.
  */
 export function ServicesCarousel() {
   const services = getAllServices();
-  const total = services.length;
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [index, setIndex] = useState(0);
-
-  const slideWidth = () => {
-    const track = trackRef.current;
-    if (!track) return 0;
-    const card = track.querySelector<HTMLElement>("[data-slide]");
-    return (card ? card.offsetWidth : track.clientWidth) || 0;
-  };
-
-  const scrollTo = (i: number) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const target = Math.min(Math.max(i, 0), total - 1);
-    track.scrollTo({
-      left: slideWidth() * target,
-      behavior: reduceMotion() ? "auto" : "smooth",
-    });
-    setIndex(target);
-  };
-
-  const onScroll = () => {
-    const width = slideWidth();
-    if (width === 0) return;
-    setIndex(Math.round((trackRef.current?.scrollLeft ?? 0) / width));
-  };
 
   return (
     <div
@@ -51,93 +34,56 @@ export function ServicesCarousel() {
       aria-label="Services"
       className="container-xl"
     >
-      {/* Controls — index left, previous/next right */}
-      <div className="flex items-center justify-between">
-        <p className="font-body text-caption font-medium uppercase tracking-caption text-text-muted">
-          {`${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`}
-        </p>
-        <div className="flex gap-3">
-          <Button
-            as="button"
-            type="button"
-            variant="secondary"
-            size="sm"
-            aria-label="Previous service"
-            onClick={() => scrollTo(index - 1)}
-            disabled={index === 0}
-            className="h-12 w-12 justify-center px-0"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path
-                d="M15 5l-7 7 7 7"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Button>
-          <Button
-            as="button"
-            type="button"
-            variant="secondary"
-            size="sm"
-            aria-label="Next service"
-            onClick={() => scrollTo(index + 1)}
-            disabled={index === total - 1}
-            className="h-12 w-12 justify-center px-0"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path
-                d="M9 5l7 7-7 7"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Button>
-        </div>
-      </div>
-
-      {/* Track — snap per slide, one visible + a controlled peek */}
+      {/* Window clips the track and scopes the hover pause. */}
       <div
-        ref={trackRef}
-        onScroll={onScroll}
         tabIndex={0}
         aria-label="Scroll through services"
-        className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 scrollbar-hide pb-2 outline-none"
+        className="group overflow-x-auto scroll-px-4 scrollbar-hide pb-2 outline-none"
       >
-        {services.map((service) => (
-          <article
-            key={service.index}
-            data-slide
-            className="flex w-[min(600px,88%)] shrink-0 snap-start flex-col justify-between rounded-lg border border-border-subtle bg-surface-primary p-8 md:p-10"
-          >
-            <div>
-              <p className="font-body text-caption font-medium uppercase tracking-caption text-text-muted">
-                {service.index}
-              </p>
-              <h3 className="mt-4 font-display text-h3 font-medium text-text-primary">
-                {service.title}
-              </h3>
-              <p className="mt-4 font-body text-body-lg text-text-secondary measure-body">
-                {service.summary}
-              </p>
-              <p className="mt-6 font-body text-caption font-medium uppercase tracking-caption text-text-muted">
-                {service.tags}
-              </p>
-            </div>
-            <p className="mt-8 font-body text-body text-text-secondary measure-body">
-              {service.supporting}
-            </p>
-            <div className="mt-8">
-              <Button as="link" href="/contact" variant="ghost">
-                Discuss this
-              </Button>
-            </div>
-          </article>
-        ))}
+        <div className="carousel-track flex gap-4 group-hover:[animation-play-state:paused]">
+          {[0, 1].map((set) =>
+            services.map((service) => {
+              const isClone = set === 1;
+
+              return (
+                <article
+                  key={`${set}-${service.index}`}
+                  data-slide
+                  aria-hidden={isClone || undefined}
+                  className="flex w-[min(600px,88%)] shrink-0 flex-col justify-between rounded-lg border border-glass-border bg-glass-card p-8 backdrop-blur-glass md:p-10"
+                >
+                  <div>
+                    <p className="font-body text-caption font-medium uppercase tracking-caption text-text-muted">
+                      {service.index}
+                    </p>
+                    <h3 className="mt-4 font-display text-h3 font-medium text-text-primary">
+                      {service.title}
+                    </h3>
+                    <p className="mt-4 font-body text-body-lg text-text-secondary measure-body">
+                      {service.summary}
+                    </p>
+                    <p className="mt-6 font-body text-caption font-medium uppercase tracking-caption text-text-muted">
+                      {service.tags}
+                    </p>
+                  </div>
+                  <p className="mt-8 font-body text-body text-text-secondary measure-body">
+                    {service.supporting}
+                  </p>
+                  <div className="mt-8">
+                    <Button
+                      as="link"
+                      href="/contact"
+                      variant="ghost"
+                      tabIndex={isClone ? -1 : undefined}
+                    >
+                      Discuss this
+                    </Button>
+                  </div>
+                </article>
+              );
+            })
+          )}
+        </div>
       </div>
     </div>
   );

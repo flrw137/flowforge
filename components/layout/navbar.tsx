@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Wordmark } from "@/components/ui/wordmark";
 
 const NAV_LINKS = [
   { href: "/work", label: "Work" },
@@ -35,6 +36,7 @@ function NavLink({ href, label }: { href: string; label: string }) {
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -105,10 +107,14 @@ export function Navbar() {
       <div className="container-xl flex h-16 items-center justify-between md:h-18">
         <Link
           href="/"
-          className="font-display text-h5 font-medium text-text-primary"
+          className="text-text-primary transition-colors duration-[180ms] ease-facet hover:text-accent"
           aria-label="FlowForge — home"
         >
-          FlowForge
+          <Wordmark
+            priority
+            logoClassName="h-12 w-auto md:h-15"
+            textClassName="text-caption font-medium uppercase tracking-caption md:text-h5 md:normal-case md:tracking-normal"
+          />
         </Link>
 
         {/* Desktop navigation */}
@@ -154,47 +160,84 @@ export function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
-          className="animate-fade-in fixed inset-0 z-80 flex flex-col bg-bg-primary md:hidden"
+          className="animate-fade-in fixed inset-0 z-80 flex flex-col bg-glass-menu pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] backdrop-blur-glass md:hidden"
         >
-          <div className="container-xl flex h-16 items-center justify-between">
-            <span className="font-display text-h5 font-medium text-text-primary">
-              FlowForge
-            </span>
-            <button
-              ref={closeRef}
-              type="button"
-              onClick={() => setOpen(false)}
-              aria-label="Close menu"
-              className="flex h-12 w-12 items-center justify-center text-text-primary"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M6 6l12 12M18 6L6 18"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </button>
+          {/* Close lives in the screen corner, not in the content row: the
+              top-right corner is the reachable, expected dismissal target on
+              touch, and it keeps the masthead row to the wordmark alone. */}
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            className="absolute right-0 top-[env(safe-area-inset-top)] flex h-16 w-16 items-center justify-center text-text-primary transition-colors duration-[180ms] ease-facet hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+
+          {/* Masthead — set at the same token as the section labels below, so
+              the menu reads as one index instead of a headline over a list. */}
+          <div className="container-xl flex h-16 shrink-0 items-center justify-center border-b border-glass-border text-text-primary">
+            <Wordmark
+              logoClassName="h-12 w-auto"
+              textClassName="text-caption font-medium uppercase tracking-caption"
+            />
           </div>
 
+{/* Index sits at the top, directly under the masthead.
+
+              justify-start, not justify-center: with flex-1 the link rows used
+              to float in the middle of the available space, leaving ~170px of
+              dead space above them on a typical phone and reading as "the menu
+              items are centered". Top-anchored, the list reads as an index
+              that begins where the masthead ends. The CTA below still sits at
+              the bottom of the overlay. */}
           <nav
             aria-label="Mobile"
-            className="container-xl flex flex-1 flex-col justify-center gap-8"
+className="container-xl flex flex-1 flex-col justify-start gap-px"
           >
-            {[{ href: "/", label: "Home" }, ...NAV_LINKS].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="font-display text-h3 font-medium text-text-primary"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {/* Each row carries ml-[max(20px)] — the requested extra left inset,
+                on top of the container's 24px gutter, so labels sit 44px from
+                the screen edge. Paired with w-[calc(100%_-_max(20px))] rather
+                than w-full: a margin-left next to a full-width box would
+                overflow 20px past the right edge and open a horizontal
+                scrollbar inside the overlay. The calc keeps the right edge
+                flush, so the row dividers still end at the container's right
+                edge. FlowForge stays centered above. */}
+            {[{ href: "/", label: "Home" }, ...NAV_LINKS].map((link) => {
+              const active =
+                link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+
+              return (
+                <Link
+                  key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`relative ml-[max(20px)] flex min-h-16 w-[calc(100%_-_max(20px))] items-center border-b border-border-subtle font-body text-caption font-medium uppercase tracking-caption transition-colors duration-[180ms] ease-facet active:text-text-primary ${
+                    active ? "text-text-primary" : "text-text-muted"
+                  }`}
+                >
+                  {link.label}
+                  {active ? (
+                    <span
+                      aria-hidden="true"
+                      className="absolute right-0 top-1/2 size-1.5 -translate-y-1/2 rounded-full bg-accent"
+                    />
+                  ) : null}
+                </Link>
+              );
+            })}
           </nav>
 
-          <div className="container-xl pb-12">
+          <div className="container-xl shrink-0 border-t border-glass-border pt-6 pb-6">
             <Button
               as="link"
               href="/contact"

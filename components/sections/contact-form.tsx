@@ -138,7 +138,7 @@ export function ContactForm() {
     return (
       <div
         role="status"
-        className="rounded-lg border border-border-subtle bg-surface-primary p-10"
+        className="rounded-lg border border-glass-border bg-glass-card p-10 backdrop-blur-glass"
       >
         <h2 className="font-display text-h3 font-medium text-text-primary">
           Thanks — it&apos;s on its way.
@@ -152,11 +152,18 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="grid gap-6 md:grid-cols-2">
+    /* The idle state sits on the same glass panel as the success and error
+       states above. The labels are text-small in text-text-secondary, which
+       has no backdrop of its own — over the contact page's ambient reel they
+       would otherwise sit directly on moving footage. The panel also keeps the
+       form reading as one object rather than loose tiles, and the opaque
+       fields keep their own contrast on top of it. */
+    <div className="rounded-lg border border-glass-border bg-glass-card p-8 backdrop-blur-glass md:p-10">
+      <form onSubmit={onSubmit} noValidate className="grid gap-6 md:grid-cols-2">
       {status === "error" ? (
         <div
           role="alert"
-          className="rounded-lg border border-border-strong bg-surface-primary p-6 md:col-span-2"
+          className="rounded-lg border border-border-strong bg-glass-card p-6 backdrop-blur-glass md:col-span-2"
         >
           <h3 className="font-display text-h5 font-medium text-text-primary">
             That didn&apos;t go through.
@@ -405,6 +412,7 @@ export function ContactForm() {
           stored on this site.
         </p>
       </div>
-    </form>
+      </form>
+    </div>
   );
 }

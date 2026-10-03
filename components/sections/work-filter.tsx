@@ -25,7 +25,7 @@ export function WorkFilter({ projects }: WorkFilterProps) {
       <div
         role="group"
         aria-label="Filter projects by industry"
-        className="flex flex-wrap gap-2"
+        className="flex flex-wrap justify-center gap-2"
       >
         {industries.map((industry) => (
           <button
