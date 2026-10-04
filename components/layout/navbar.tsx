@@ -182,9 +182,8 @@ export function Navbar() {
             </svg>
           </button>
 
-          {/* Masthead — set at the same token as the section labels below, so
-              the menu reads as one index instead of a headline over a list. */}
-          <div className="container-xl flex h-16 shrink-0 items-center justify-center border-b border-glass-border text-text-primary">
+          {/* Masthead — logo stays centered in the mobile viewport */}
+          <div className="relative flex h-16 shrink-0 items-center justify-center border-b border-glass-border text-text-primary">
             <Wordmark
               logoClassName="h-12 w-auto"
               textClassName="text-caption font-medium uppercase tracking-caption"
@@ -201,7 +200,7 @@ export function Navbar() {
               the bottom of the overlay. */}
           <nav
             aria-label="Mobile"
-className="container-xl flex flex-1 flex-col justify-start gap-px"
+            className="flex flex-1 flex-col justify-start"
           >
             {/* Each row carries ml-[max(20px)] — the requested extra left inset,
                 on top of the container's 24px gutter, so labels sit 44px from
@@ -221,7 +220,7 @@ className="container-xl flex flex-1 flex-col justify-start gap-px"
                     href={link.href}
                     onClick={() => setOpen(false)}
                     aria-current={active ? "page" : undefined}
-                    className={`relative ml-[max(20px)] flex min-h-16 w-[calc(100%_-_max(20px))] items-center border-b border-border-subtle font-body text-caption font-medium uppercase tracking-caption transition-colors duration-[180ms] ease-facet active:text-text-primary ${
+                    className={`relative flex min-h-16 w-full items-center border-b border-border-subtle pl-6 pr-6 font-body text-caption font-medium uppercase tracking-caption transition-colors duration-[180ms] ease-facet active:text-text-primary sm:pl-8 sm:pr-8 md:pl-10 md:pr-10 ${
                     active ? "text-text-primary" : "text-text-muted"
                   }`}
                 >
@@ -237,7 +236,7 @@ className="container-xl flex flex-1 flex-col justify-start gap-px"
             })}
           </nav>
 
-          <div className="container-xl shrink-0 border-t border-glass-border pt-6 pb-6">
+          <div className="shrink-0 border-t border-glass-border pt-6 pb-6 pl-6 pr-6 sm:pl-8 sm:pr-8 md:pl-10 md:pr-10">
             <Button
               as="link"
               href="/contact"
