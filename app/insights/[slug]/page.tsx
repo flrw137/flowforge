@@ -33,11 +33,20 @@ export default async function InsightDetailPage({ params }: Props) {
           too, and the content below overlaps via -mt. The 1924x1076 (~16:9)
           source needs no horizontal stretch; desktop zoom matches /work. */}
       <section className="relative">
-        <SectionVideoBackground
-          src="/media/videos/wvideo.mp4"
-          className="sticky top-0 h-svh w-full overflow-hidden"
-          videoClassName="md:scale-x-[1.65] md:scale-y-[1.5]"
-        />
+        {/* Background video - consistent with detail pages, subtly blurred */}
+        <div aria-hidden="true" className="pointer-events-none sticky top-0 -z-10 h-svh w-full overflow-hidden">
+          <video
+            src="/media/videos/wvideo.mp4"
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="auto"
+            disablePictureInPicture
+            className="absolute inset-0 h-full w-full scale-[1.03] object-cover blur-[6px]"
+          />
+          <div className="absolute inset-0 bg-bg-primary/70" />
+        </div>
 
         <div className="relative z-10 -mt-[100svh]">
           {/* Header — category, title, excerpt */}

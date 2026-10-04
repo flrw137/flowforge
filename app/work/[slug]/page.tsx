@@ -37,6 +37,37 @@ export default async function WorkDetailPage({ params }: Props) {
 
   return (
     <main id="main" className="flex-1">
+      {/* Background — the destination's visual, softly blurred behind content */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-10"
+      >
+        <Image
+          src={project.image.src}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="h-full w-full scale-110 object-cover blur-sm opacity-25 sm:blur-md md:blur-lg"
+        />
+        <div className="absolute inset-0 bg-bg-primary/70" />
+      </div>
+
+      {/* Background video - consistent with detail pages, subtly blurred */}
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <video
+          src="/media/videos/wkvideo.mp4"
+          muted
+          loop
+          playsInline
+          autoPlay
+          preload="auto"
+          disablePictureInPicture
+          className="absolute inset-0 h-full w-full scale-[1.03] object-cover blur-[6px]"
+        />
+        <div className="absolute inset-0 bg-bg-primary/70" />
+      </div>
+
       {/* Header — identity + positioning */}
       <section className="container-xl pt-40 pb-16">
         <p className="font-body text-caption font-medium uppercase tracking-caption text-text-muted">

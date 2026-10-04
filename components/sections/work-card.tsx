@@ -12,16 +12,27 @@ export function WorkCard({ project }: { project: WorkProject }) {
   return (
     <Link
       href={`/work/${project.slug}`}
-      className="group block rounded-lg border border-glass-border bg-glass-card backdrop-blur-glass transition-colors duration-[280ms] ease-facet hover:border-border-default"
+      className="group relative block overflow-hidden rounded-lg border border-glass-border bg-glass-card/80 backdrop-blur-glass transition-colors duration-[280ms] ease-facet hover:border-border-default"
     >
-      <div className="aspect-video overflow-hidden rounded-t-lg bg-bg-secondary">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <Image
+          src={project.image.src}
+          alt=""
+          fill
+          sizes="(min-width: 768px) 50vw, 100vw"
+          className="h-full w-full scale-110 object-cover blur-sm opacity-30 transition-opacity duration-[450ms] ease-facet group-hover:opacity-40 sm:blur-md md:blur-lg"
+        />
+        <div className="absolute inset-0 bg-bg-primary/70" />
+      </div>
+
+      <div className="relative aspect-video overflow-hidden rounded-t-lg">
         <Image
           src={project.image.src}
           alt={project.image.alt}
           width={project.image.src.width}
           height={project.image.src.height}
           sizes="(min-width: 768px) 50vw, 100vw"
-          className="h-full w-full object-cover transition-transform duration-[450ms] ease-facet group-hover:scale-[1.02]"
+          className="relative z-10 h-full w-full object-cover transition-transform duration-[450ms] ease-facet group-hover:scale-[1.02]"
         />
       </div>
 
