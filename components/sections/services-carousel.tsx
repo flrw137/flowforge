@@ -32,15 +32,15 @@ export function ServicesCarousel() {
       role="region"
       aria-roledescription="carousel"
       aria-label="Services"
-      className="container-xl"
+      className="-mx-4 sm:mx-0"
     >
       {/* Window clips the track and scopes the hover pause. */}
       <div
         tabIndex={0}
         aria-label="Scroll through services"
-        className="group overflow-x-auto scroll-px-4 scrollbar-hide pb-2 outline-none"
+        className="group -mx-4 overflow-x-auto scroll-px-2 scrollbar-hide pb-2 outline-none px-0 sm:-mx-0 sm:px-0"
       >
-        <div className="carousel-track flex gap-4 group-hover:[animation-play-state:paused]">
+        <div className="carousel-track flex gap-4 pl-4 pr-2 group-hover:[animation-play-state:paused] sm:px-0">
           {[0, 1].map((set) =>
             services.map((service) => {
               const isClone = set === 1;

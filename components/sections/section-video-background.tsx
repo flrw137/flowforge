@@ -21,17 +21,27 @@ import { useEffect, useRef } from "react";
  * crop the sides on a portrait viewport; spreading the scales slightly wider
  * than tall compensates without visible distortion. Mobile leaves the zoom
  * off — a portrait viewport already crops a landscape source heavily.
+ *
+ * Dimming: `overlayClassName` adds the flat scrim between video and content
+ * that the blurred-background pages use (`bg-bg-primary/70`). Flat token fill,
+ * never a gradient. Left unset on pages where the reel is the point of the
+ * section and should read at full strength.
  */
 export function SectionVideoBackground({
   src,
   className = "",
   videoClassName = "",
+  overlayClassName = "",
+  preload = "auto",
 }: {
   src: string;
   /** Stage box — usually "sticky top-0 h-svh w-full overflow-hidden". */
   className?: string;
   /** Zoom/stretch for the video itself. */
   videoClassName?: string;
+  /** Flat scrim over the video, under the content — e.g. "bg-bg-primary/70". */
+  overlayClassName?: string;
+  preload?: "auto" | "metadata" | "none";
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -46,11 +56,16 @@ export function SectionVideoBackground({
 
     const tryPlay = async () => {
       try {
-        if (video.readyState >= 2) {
-          await video.play();
-        }
+        // Called unconditionally. A muted video is always permitted to autoplay,
+        // and the browser pulls whatever data it still needs to start. Gating this
+        // on `readyState >= 2` deadlocks under preload="metadata": the browser
+        // stops at readyState 1 (HAVE_METADATA), so the guard skips play() and the
+        // data-dependent retry events below never fire either — leaving playback
+        // entirely to the autoPlay attribute heuristic, which is not reliable.
+        await video.play();
       } catch {
-        // Silent fallback: do not block the page if autoplay is denied.
+        // Autoplay denied: fall back to the flat token background, never block
+        // the page.
       }
     };
 
@@ -62,8 +77,20 @@ export function SectionVideoBackground({
     ];
 
     events.forEach((event) => {
-      video.addEventListener(event, tryPlay, { once: false });
+      video.addEventListener(event, tryPlay);
     });
+
+    // Surface genuine load/decode failures — 404, wrong path, unsupported codec.
+    // The stage is decorative and pointer-events-none, so without this a broken
+    // source fails completely silently and just looks like missing styling.
+    const onError = () => {
+      console.error(
+        `[SectionVideoBackground] failed to load ${src}`,
+        video.error?.message ?? video.error?.code ?? video.networkState,
+      );
+    };
+
+    video.addEventListener("error", onError);
 
     void tryPlay();
 
@@ -71,8 +98,9 @@ export function SectionVideoBackground({
       events.forEach((event) => {
         video.removeEventListener(event, tryPlay);
       });
+      video.removeEventListener("error", onError);
     };
-  }, []);
+  }, [src]);
 
   return (
     <div className={`pointer-events-none relative ${className}`}>
@@ -82,12 +110,19 @@ export function SectionVideoBackground({
         muted
         loop
         playsInline
+        webkit-playsinline="true"
         autoPlay
-        preload="auto"
+        preload={preload}
         disablePictureInPicture
         aria-hidden="true"
         className={`absolute inset-0 h-full w-full object-cover object-center ${videoClassName}`}
       />
+      {overlayClassName ? (
+        <div
+          aria-hidden="true"
+          className={`absolute inset-0 ${overlayClassName}`}
+        />
+      ) : null}
     </div>
   );
 }

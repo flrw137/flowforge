@@ -170,7 +170,7 @@ export function Navbar() {
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Close menu"
-            className="absolute right-0 top-[env(safe-area-inset-top)] flex h-16 w-16 items-center justify-center text-text-primary transition-colors duration-[180ms] ease-facet hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
+            className="absolute right-0 top-[env(safe-area-inset-top)] z-[999] pointer-events-auto flex h-16 w-16 items-center justify-center text-text-primary transition-colors duration-[180ms] ease-facet hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path

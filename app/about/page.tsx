@@ -62,7 +62,13 @@ export default function AboutPage() {
 
           The sticky element must not sit inside an overflow container
           (ancestor overflow would trap it), so clipping lives on the stage
-          itself. */}
+          itself.
+
+          preload stays at the component default ("auto"): this is the first
+          thing on the page and it is the section's whole visual identity, so
+          it must not depend on the autoPlay heuristic winning a race with
+          the preload hint. "metadata" stalls at readyState 1 and the video
+          never paints a frame. */}
       <section className="relative">
         <SectionVideoBackground
           src="/media/videos/wkfv.mp4"
