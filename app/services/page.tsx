@@ -8,7 +8,7 @@ import { SectionVideoBackground } from "@/components/sections/section-video-back
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "FlowForge capabilities — AI systems, automation, web design and development, digital products, and custom software, carried end to end.",
+    "Facet capabilities — AI systems, automation, web design and development, digital products, and custom software, carried end to end.",
 };
 
 export default function ServicesPage() {

@@ -13,7 +13,7 @@ no client names, no testimonials.
 
 - Label: `AI, automation & digital systems`
 - Headline: `We build digital systems that hold up under scrutiny.`
-- Supporting: `FlowForge is a technology and design studio. We design and build AI systems, automation, and web products for teams that care how things are made.`
+- Supporting: `Facet is a technology and design studio. We design and build AI systems, automation, and web products for teams that care how things are made.`
 - Primary CTA: `Start a project` → `/contact`
 - Secondary CTA: `See our work` → `/case-studies`
 

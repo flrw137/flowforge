@@ -7,7 +7,7 @@ const CUBE_SRC_MOBILE = "/media/videos/wvideo.mp4";
 const MOBILE_QUERY = "(max-width: 767px)"; // matches the md: breakpoint
 
 /**
- * Glass Cube — the primary signature visual of FlowForge.
+ * Glass Cube — the primary signature visual of Facet.
  * Hero only. Native HTML5 video: muted, loop, playsInline, no controls.
  * Source is chosen by viewport: desktop streams the Cloudinary asset, mobile
  * uses the local, compressed `public/media/videos/cube.mp4` (kebab-case,

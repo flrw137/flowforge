@@ -60,7 +60,7 @@ visual. This page is the CTA's destination, not its duplicate.
 
 ## Notes / flags
 
-- **Email address for submissions** — placeholder `hello@flowforge.studio` wired in
+- **Email address for submissions** — placeholder `hello@facet.studio` wired in
   (`CONTACT_TO_EMAIL`); swap for the real inbox before launch.
 - **Email provider** — **Resend** chosen 2026-09-14; Route Handler → Resend
   implemented; needs real API key + verified sending domain at launch.

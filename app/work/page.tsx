@@ -12,7 +12,7 @@ import { getAllWorkProjects } from "@/lib/work";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected projects by FlowForge — software, automation, and AI systems designed and built end to end.",
+    "Selected projects by Facet — software, automation, and AI systems designed and built end to end.",
 };
 
 export default function WorkPage() {
@@ -51,7 +51,7 @@ export default function WorkPage() {
             <SectionHeading
               label="Work"
               title="Selected work"
-              supporting="A selection of projects across fintech, logistics, healthcare, professional services, manufacturing, and architecture. Each one was designed and built by FlowForge end to end."
+              supporting="A selection of projects across fintech, logistics, healthcare, professional services, manufacturing, and architecture. Each one was designed and built by Facet end to end."
               align="center"
             />
           </div>

@@ -6,12 +6,12 @@ Status: **DRAFT — awaiting approval**
 
 ## Footer
 
-- Studio line: `FlowForge — a technology and design studio.`
+- Studio line: `Facet — a technology and design studio.`
 - Tagline (optional): `Designed, not decorated.` (proposed; cut if it reads as a gimmick)
 - Navigation columns: `Home` / `Services` / `Work` / `About` / `Insights` / `Contact`
 - Contact line: (**needs email address — flag**)
 - Legal links: `Imprint` / `Privacy` (**pages and copy needed if required in your jurisdiction — flag**)
-- Copyright line: `© {year} FlowForge. All rights reserved.`
+- Copyright line: `© {year} Facet. All rights reserved.`
 
 ---
 

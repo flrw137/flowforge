@@ -7,7 +7,7 @@ import { getAllCaseStudies } from "@/lib/case-studies";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Selected projects by FlowForge — AI systems, automation, and web products, designed and built end to end.",
+    "Selected projects by Facet — AI systems, automation, and web products, designed and built end to end.",
 };
 
 export default function CaseStudiesPage() {
@@ -60,7 +60,7 @@ export default function CaseStudiesPage() {
             <SectionHeading
               label="Work"
               title="Selected projects"
-              supporting="A selection of work across AI systems, automation, and web products. Each project was designed and built by FlowForge end to end."
+              supporting="A selection of work across AI systems, automation, and web products. Each project was designed and built by Facet end to end."
             />
           </div>
 

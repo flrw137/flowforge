@@ -10,7 +10,7 @@ type WordmarkProps = {
 };
 
 /**
- * FlowForge wordmark: logo + name, in one place so the navbar, the mobile
+ * Facet wordmark: logo + name, in one place so the navbar, the mobile
  * masthead, and the footer never drift apart.
  *
  * The name is set in Orbitron (`font-brand`) — the only text on the site that
@@ -32,7 +32,7 @@ export function Wordmark({
         priority={priority}
         className={logoClassName}
       />
-      <span className={`font-brand ${textClassName}`}>FlowForge</span>
+      <span className={`font-brand ${textClassName}`}>Facet</span>
     </span>
   );
 }

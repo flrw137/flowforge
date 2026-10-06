@@ -6,11 +6,11 @@ import { Label } from "@/components/ui/section-heading";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Tell FlowForge about your project — AI systems, automation, design, and development, built end to end. We reply within two business days.",
+    "Tell Facet about your project — AI systems, automation, design, and development, built end to end. We reply within two business days.",
 };
 
 // Placeholder until the client's real address is provided (progress-tracker).
-const CONTACT_EMAIL = "hello@flowforge.studio";
+const CONTACT_EMAIL = "hello@facet.studio";
 
 export default function ContactPage() {
   return (

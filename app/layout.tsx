@@ -21,11 +21,11 @@ const orbitron = Orbitron({
 
 export const metadata: Metadata = {
   title: {
-    default: "FlowForge — Technology & Design Studio",
-    template: "%s — FlowForge",
+    default: "Facet — Technology & Design Studio",
+    template: "%s — Facet",
   },
   description:
-    "FlowForge is a technology and design studio building AI systems, automation, and web products for teams that care how things are made.",
+    "Facet is a technology and design studio building AI systems, automation, and web products for teams that care how things are made.",
   // Open Graph images pending — OG assets not yet provided.
 };
 

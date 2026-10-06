@@ -40,7 +40,7 @@ export function Footer() {
         </nav>
 
         <p className="font-body text-small text-text-muted">
-          © {new Date().getFullYear()} FlowForge. All rights reserved.
+          © {new Date().getFullYear()} Facet. All rights reserved.
         </p>
       </div>
     </footer>

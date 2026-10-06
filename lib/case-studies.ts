@@ -13,7 +13,7 @@ import caseMeridianClinicalSearch from "@/public/media/images/case-meridian-clin
  * NOTE: The four entries below are FICTIONAL DEMO CONTENT (flagged in
  * content/case-studies.md, added 2026-09-14 by client decision) so the work
  * section can be shown during demos. They must be replaced with real,
- * approved client content before any public launch. Images are FlowForge-built
+ * approved client content before any public launch. Images are Facet-built
  * mockups, not screenshots of shipped products.
  *
  * Detail route: /case-studies/[slug]
@@ -54,7 +54,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     services: "AI systems · Automation",
     year: "2026",
     summary:
-      "Norn's claims operations ran on email, spreadsheets, and manual re-entry. FlowForge rebuilt it as a shared review desk that routes claims, extracts policy and loss details from attached documents, and keeps a human decision at the centre of every payout. Review moved from ad-hoc queues to a single, auditable workflow.",
+      "Norn's claims operations ran on email, spreadsheets, and manual re-entry. Facet rebuilt it as a shared review desk that routes claims, extracts policy and loss details from attached documents, and keeps a human decision at the centre of every payout. Review moved from ad-hoc queues to a single, auditable workflow.",
     image: {
       src: caseNornClaims,
       alt: "Norn Claims review desk: intake queue, extracted claim fields, and an approve decision panel.",
@@ -67,7 +67,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     services: "Web product · Automation",
     year: "2026",
     summary:
-      "Harborline coordinated road and feeder movements across several yards with paper manifests and phone calls. FlowForge built a live dispatch board that keeps every load, ETA, and hand-off in a single view, so planners can see the whole fleet without leaving the desk. Status now travels with the shipment, not the spreadsheet.",
+      "Harborline coordinated road and feeder movements across several yards with paper manifests and phone calls. Facet built a live dispatch board that keeps every load, ETA, and hand-off in a single view, so planners can see the whole fleet without leaving the desk. Status now travels with the shipment, not the spreadsheet.",
     image: {
       src: caseHarborlineDispatch,
       alt: "Harborline dispatch board: in-dispatch, en-route, and delivered lanes for a mixed fleet.",
@@ -80,7 +80,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     services: "Web product · AI systems",
     year: "2026",
     summary:
-      "Opening an account with Alder meant submitting the same documents several times. FlowForge designed a staged onboarding flow that verifies documents as they arrive and keeps applicants moving through the process. The first impression is one of being handled, not fought over.",
+      "Opening an account with Alder meant submitting the same documents several times. Facet designed a staged onboarding flow that verifies documents as they arrive and keeps applicants moving through the process. The first impression is one of being handled, not fought over.",
     image: {
       src: caseAlderOnboarding,
       alt: "Alder onboarding flow: staged application form with document verification status.",
@@ -93,7 +93,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     services: "AI systems · Web development",
     year: "2026",
     summary:
-      "Clinical teams needed to find protocol, consent, and safety documents across a sprawling private corpus — without leaving approved surfaces. FlowForge built a search workspace scoped to indexed sources, with the trail of every result visible and auditable. Less context-switching, and the search boundary is explicit by design.",
+      "Clinical teams needed to find protocol, consent, and safety documents across a sprawling private corpus — without leaving approved surfaces. Facet built a search workspace scoped to indexed sources, with the trail of every result visible and auditable. Less context-switching, and the search boundary is explicit by design.",
     image: {
       src: caseMeridianClinicalSearch,
       alt: "Meridian clinical search workspace: query field, result list, and indexed source panel.",

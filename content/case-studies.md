@@ -11,7 +11,7 @@ They do not represent real clients, deliverables, or results.
 > These entries exist so the work section can be shown during demos. Replace
 > them with real, approved client projects before any public launch. Per
 > project rules, no famous clients, awards, invented metrics, or unrealistic
-> claims were added. Visuals are FlowForge-built demo mockups, not screenshots of
+> claims were added. Visuals are Facet-built demo mockups, not screenshots of
 > shipped products.
 
 ---
@@ -20,7 +20,7 @@ They do not represent real clients, deliverables, or results.
 
 - Label: `Work`
 - Heading: `Selected projects`
-- Supporting: `A selection of work across AI systems, automation, and web products. Each project was designed and built by FlowForge end to end.`
+- Supporting: `A selection of work across AI systems, automation, and web products. Each project was designed and built by Facet end to end.`
 
 ---
 
@@ -51,8 +51,8 @@ it is not rewritten in components.
 - Positioning line: Claims intake and document review, rebuilt as a single review desk.
 - Services: AI systems · Automation
 - Year: 2026
-- Summary: Norn's claims operations ran on email, spreadsheets, and manual re-entry. FlowForge rebuilt it as a shared review desk that routes claims, extracts policy and loss details from attached documents, and keeps a human decision at the centre of every payout. Review moved from ad-hoc queues to a single, auditable workflow.
-- Visual: `public/media/images/case-norn-claims.png` (FlowForge demo mockup — claims review screen)
+- Summary: Norn's claims operations ran on email, spreadsheets, and manual re-entry. Facet rebuilt it as a shared review desk that routes claims, extracts policy and loss details from attached documents, and keeps a human decision at the centre of every payout. Review moved from ad-hoc queues to a single, auditable workflow.
+- Visual: `public/media/images/case-norn-claims.png` (Facet demo mockup — claims review screen)
 - Link: — (not public)
 
 ### harborline-dispatch
@@ -61,8 +61,8 @@ it is not rewritten in components.
 - Positioning line: A live dispatch board for a mixed fleet, with every move in one view.
 - Services: Web product · Automation
 - Year: 2026
-- Summary: Harborline coordinated road and feeder movements across several yards with paper manifests and phone calls. FlowForge built a live dispatch board that keeps every load, ETA, and hand-off in a single view, so planners can see the whole fleet without leaving the desk. Status now travels with the shipment, not the spreadsheet.
-- Visual: `public/media/images/case-harborline-dispatch.png` (FlowForge demo mockup — dispatch board)
+- Summary: Harborline coordinated road and feeder movements across several yards with paper manifests and phone calls. Facet built a live dispatch board that keeps every load, ETA, and hand-off in a single view, so planners can see the whole fleet without leaving the desk. Status now travels with the shipment, not the spreadsheet.
+- Visual: `public/media/images/case-harborline-dispatch.png` (Facet demo mockup — dispatch board)
 - Link: — (not public)
 
 ### alder-onboarding
@@ -71,8 +71,8 @@ it is not rewritten in components.
 - Positioning line: Client onboarding as a calm, document-light flow.
 - Services: Web product · AI systems
 - Year: 2026
-- Summary: Opening an account with Alder meant submitting the same documents several times. FlowForge designed a staged onboarding flow that verifies documents as they arrive and keeps applicants moving through the process. The first impression is one of being handled, not fought over.
-- Visual: `public/media/images/case-alder-onboarding.png` (FlowForge demo mockup — onboarding flow)
+- Summary: Opening an account with Alder meant submitting the same documents several times. Facet designed a staged onboarding flow that verifies documents as they arrive and keeps applicants moving through the process. The first impression is one of being handled, not fought over.
+- Visual: `public/media/images/case-alder-onboarding.png` (Facet demo mockup — onboarding flow)
 - Link: — (not public)
 
 ### meridian-clinical-search
@@ -81,8 +81,8 @@ it is not rewritten in components.
 - Positioning line: A retrieval workspace for a private clinical corpus.
 - Services: AI systems · Web development
 - Year: 2026
-- Summary: Clinical teams needed to find protocol, consent, and safety documents across a sprawling private corpus — without leaving approved surfaces. FlowForge built a search workspace scoped to indexed sources, with the trail of every result visible and auditable. Less context-switching, and the search boundary is explicit by design.
-- Visual: `public/media/images/case-meridian-clinical-search.png` (FlowForge demo mockup — retrieval workspace)
+- Summary: Clinical teams needed to find protocol, consent, and safety documents across a sprawling private corpus — without leaving approved surfaces. Facet built a search workspace scoped to indexed sources, with the trail of every result visible and auditable. Less context-switching, and the search boundary is explicit by design.
+- Visual: `public/media/images/case-meridian-clinical-search.png` (Facet demo mockup — retrieval workspace)
 - Link: — (not public)
 
 ---

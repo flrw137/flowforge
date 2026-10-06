@@ -10,7 +10,7 @@ Not a "meet the team" template. No team bios, photos, or invented history.
 ## Opening (point of view)
 
 - Label: `The studio`
-- Heading: `FlowForge is a technology and design studio.`
+- Heading: `Facet is a technology and design studio.`
 - Lead: `We believe the best digital work comes from treating design and engineering as one practice, not a handoff. We take on fewer projects so each one gets the attention it deserves.`
 
 ---

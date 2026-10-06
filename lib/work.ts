@@ -53,7 +53,7 @@ export const WORK_PROJECTS: WorkProject[] = [
     technologies: ["TypeScript", "React", "PostgreSQL", "Document extraction", "Evaluation harnesses"],
     positioning: "Creditor-ledger software that turned a month-end spreadsheet ritual into a single, reviewable process.",
     overview:
-      "LedgerFlow builds treasury software for the finance teams of growing companies. When FlowForge came in, their own month-end ran on spreadsheets that travelled between three departments — each editing, none agreeing.",
+      "LedgerFlow builds treasury software for the finance teams of growing companies. When Facet came in, their own month-end ran on spreadsheets that travelled between three departments — each editing, none agreeing.",
     challenge:
       "Balances rarely reconciled on the first pass. Matched lines were tracked in comments, unmatched lines lived in a fourth spreadsheet, and nobody could say after the fact who had approved what. Every close started from a trust deficit.",
     approach:

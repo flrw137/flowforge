@@ -6,7 +6,7 @@ import { SectionVideoBackground } from "@/components/sections/section-video-back
 export const metadata: Metadata = {
   title: "About",
   description:
-    "FlowForge is a technology and design studio. Design and engineering as one practice — fewer projects, done properly.",
+    "Facet is a technology and design studio. Design and engineering as one practice — fewer projects, done properly.",
 };
 
 const process = [
@@ -81,7 +81,7 @@ export default function AboutPage() {
           <section className="container-xl pt-40 pb-24 text-center">
             <SectionHeading
               label="The studio"
-              title="FlowForge is a technology and design studio."
+              title="Facet is a technology and design studio."
               supporting="We believe the best digital work comes from treating design and engineering as one practice, not a handoff. We take on fewer projects so each one gets the attention it deserves."
               align="center"
             />

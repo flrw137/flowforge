@@ -108,7 +108,7 @@ export function Navbar() {
         <Link
           href="/"
           className="text-text-primary transition-colors duration-[180ms] ease-facet hover:text-accent"
-          aria-label="FlowForge — home"
+          aria-label="Facet — home"
         >
           <Wordmark
             priority
@@ -209,7 +209,7 @@ export function Navbar() {
                 overflow 20px past the right edge and open a horizontal
                 scrollbar inside the overlay. The calc keeps the right edge
                 flush, so the row dividers still end at the container's right
-                edge. FlowForge stays centered above. */}
+                edge. Facet stays centered above. */}
             {[{ href: "/", label: "Home" }, ...NAV_LINKS].map((link) => {
               const active =
                 link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);

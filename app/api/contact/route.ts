@@ -13,7 +13,7 @@ import { Resend } from "resend";
  *                          Resend sandbox sender, test-mode only)
  */
 
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "hello@flowforge.studio";
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL ?? "hello@facet.studio";
 
 export const PROJECT_TYPES = [
   "AI systems",
@@ -128,7 +128,7 @@ export async function POST(request: Request) {
 
   try {
     const { error } = await resend.emails.send({
-      from: process.env.CONTACT_FROM_EMAIL ?? "FlowForge <onboarding@resend.dev>",
+      from: process.env.CONTACT_FROM_EMAIL ?? "Facet <onboarding@resend.dev>",
       to: [TO_EMAIL],
       replyTo: cleaned.email as string,
       subject: `New project inquiry — ${cleaned.name}`,

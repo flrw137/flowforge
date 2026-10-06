@@ -3,7 +3,7 @@ import { GlassCube } from "@/components/sections/glass-cube";
 import { HeroServicesTape } from "@/components/sections/hero-services-tape";
 
 /**
- * Hero — the primary visual and messaging statement of FlowForge.
+ * Hero — the primary visual and messaging statement of Facet.
  * Copy: approved `my-app/content/home.md` (do not rewrite).
  * Composition (client decision 2026-09-10): Glass Cube as full-bleed section
  * background — z-10 per token layering (Section media). Copy sits in the
@@ -32,9 +32,11 @@ export function Hero() {
         <GlassCube className="h-full w-full" />
       </div>
 
-      {/* Copy — Content layer (z-20), bottom-left of the hero */}
+      {/* Copy — Content layer (z-20). Bottom-left of the hero; bottom-centred on
+          mobile (below md), which is where the site draws its mobile boundary
+          — the same rule as the `md:hidden` shiny spans above. */}
       <div className="relative z-20 container-xl w-full pb-16 md:pb-20 xl:pb-24">
-        <div className="measure-hero">
+        <div className="measure-hero text-center md:text-left">
           <p className="animate-rise font-body text-caption font-medium uppercase tracking-caption text-text-secondary">
             AI, automation &amp;{' '}
             <span
@@ -75,11 +77,11 @@ export function Hero() {
             up under scrutiny.
           </h1>
           <p className="animate-rise-2 mt-7 max-w-[760px] font-body text-[clamp(1.1rem,1.65vw,2rem)] leading-[1.45] text-text-secondary">
-            FlowForge is a technology and design studio. We design and build AI
+            Facet is a technology and design studio. We design and build AI
             systems, automation, and web products for teams that care how
             things are made.
           </p>
-          <div className="animate-rise-3 mt-10 flex flex-wrap items-center gap-4 md:mt-12">
+          <div className="animate-rise-3 mt-10 flex flex-wrap items-center justify-center gap-4 md:mt-12 md:justify-start">
             <Button as="link" href="/contact">
               Start a project
             </Button>
